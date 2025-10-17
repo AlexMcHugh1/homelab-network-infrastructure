@@ -76,7 +76,7 @@ U01 └────────────────────────�
 | 2         | Protectli LAN    | Gi1/0/1     | Trunk           | VLANs 10,20,30,40,99    |
 | 3         | Bosgame Mini PC  | Gi1/0/2     | VLAN 40         | Lab node                |
 | 4         | Raspberry Pi 5   | Gi1/0/3     | VLAN 20         | IoT device              |
-| 5         | Dell OptiPlex    | Gi1/0/4     | VLAN 10         | File storage / NAS node |
+| 5         | Dell OptiPlex    | Gi1/0/4     | VLAN 10         | File storage            |
 | 6         | Desktop PC       | Gi1/0/5     | VLAN 10         | Admin desktop           |
 | 7         | ThinkPad (Kali)  | Gi1/0/6     | VLAN 40         | Pentesting laptop       |
 
