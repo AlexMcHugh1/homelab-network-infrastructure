@@ -5,6 +5,12 @@ The lab network is fully segmented from the home Wi-Fi network and used for fire
 
 ---
 
+## Lab Photo
+
+![Home Lab Photograph](home-lab-photograph.JPG)
+
+---
+
 ## Hardware Overview
 
 | Device | Role | Notes |
