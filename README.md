@@ -64,12 +64,12 @@ The lab network is fully segmented from the home Wi-Fi network and used for fire
 
 | File | Description |
 |------|--------------|
-| [`01_rack_plan_and_inventory.md`](docs/00_rack_plan_and_inventory.md) | Rack elevation and full inventory |
-| [`02_physical_topology.md`](docs/01_physical_topology.md) | Rack wiring, patch panel, and switch mapping |
-| [`03_network_design.md`](docs/02_network_design.md) | VLAN plan, subnets, and IP addressing |
-| [`04_switch_configuration.md`](docs/03_switch_configuration.md) | Cisco WS-C2960S trunk + access port config |
-| [`05_pfsense_configuration.md`](docs/04_pfsense_configuration.md) | pfSense VLANs, DHCP, and firewall setup |
-| [`06_testing_and_verification.md`](docs/05_testing_and_verification.md) | Ping, isolation, and connectivity tests |
+| [`01_rack_plan_and_inventory.md`](docs/01_rack_plan_and_inventory.md) | Rack elevation and full inventory |
+| [`02_physical_topology.md`](docs/02_physical_topology.md) | Rack wiring, patch panel, and switch mapping |
+| [`03_network_design.md`](docs/03_network_design.md) | VLAN plan, subnets, and IP addressing |
+| [`04_switch_configuration.md`](docs/04_switch_configuration.md) | Cisco WS-C2960S trunk + access port config |
+| [`05_pfsense_configuration.md`](docs/05_pfsense_configuration.md) | pfSense VLANs, DHCP, and firewall setup |
+| [`06_testing_and_verification.md`](docs/06_testing_and_verification.md) | Ping, isolation, and connectivity tests |
 
 ---
 
