@@ -49,20 +49,23 @@ U01 └────────────────────────�
 ## Rack & Network Inventory
 
 
-| Item              | Make / Model                                   | Role                         | Mount / U          | Power             | Network            | Notes                             |
-|-------------------|-------------------------------------------------|------------------------------|--------------------|------------------|--------------------------------------------------------|
-| Patch Panel    | **24-port Cat6**                                | Front termination            | **U12**            | —                | —                  | Top of rack |
-| Cable Manager  | **Brush panel**                                 | Cable hygiene                | **U11**            | —                | —                  | Below patch for dressing     |
-| Fan Shelf      | **1U**                                          | Cooling / airflow            | **U10**            | IEC to PDU       | —                  | Temperature control  |
-| Managed Switch | **Cisco WS-C2960S-24TS-L**                      | L2 switching, VLANs          | **U09**            | IEC C13 to PDU   | 24×1G (no PoE)     | Trunk on Gi1/0/1 to pfSense  |
-| Firewall   | **Protectli FW4C**                              | pfSense CE router/firewall   | **U07 (shelf)**    | 12V DC to PDU    | 4×1G (igc0–igc3) | WAN→Home router; LAN trunk→Switch |
-| Bosgame Mini PC | **Ryzen 7 5825U / 32GB / 1TB NVMe**             | Proxmox host / SIEM VMs| **U07 (shelf)**    | 19V DC to PDU    | 1×1G               | USB to SATA dock|
-| Raspberry Pi    | **Raspberry Pi 5 (8GB)**                        | Lab node / controllers       | **U07 (shelf)**    | USB-C to PDU     | 1×1G               | Home Assistant / tooling capable |
-| Spare Shelf     | —                                               | Future expansion             | **U06**            | —                | —                  | Currently empty|
-| PDU             | **Front-mount PDU**                             | Power distribution           | **U04**            | Mains            | —                  | Feeds all gear                    |
-| Dell OptiPlex   | **Dell OptiPlex**                               | File storage / NAS-style node| **U02 (with dock)**| Mains            | 1×1G             | Connected via VLAN 10|
-| SATA Dock       | **2-bay USB (8TB + 2TB HDD)**                   | Bulk storage                 | **U02 (with Dell)**| 12V DC to PDU    | USB→Bosgame      | Media/backup; not NAS-grad|
-| ISP Router      | *(Home router)*                                 | Internet uplink              | **External**       | Mains            | 4×LAN            | Provides DHCP to pfSense WAN    |
+## Rack & Network Inventory
+
+| Item            | Make / Model                  | Role                         | Mount / U     | Power          | Network               | Notes |
+|-----------------|-------------------------------|------------------------------|---------------|----------------|-----------------------|-------|
+| Patch Panel     | 24-port Cat6                  | Front termination            | U12           | —              | —                     | Top of rack |
+| Cable Manager   | Brush panel                   | Cable hygiene                | U11           | —              | —                     | Below patch for dressing |
+| Fan Shelf       | 1U                            | Cooling / airflow            | U10           | IEC to PDU     | —                     | Exhaust out; temp control |
+| Managed Switch  | Cisco WS-C2960S-24TS-L        | L2 switching, VLANs          | U09           | IEC C13 to PDU | 24×1G (no PoE)        | Trunk on Gi1/0/1 to pfSense (10,20,30,40,99; native 10) |
+| Firewall        | Protectli FW4C                | pfSense CE router/firewall   | U07 (shelf)   | 12V DC to PDU  | 4×1G (igc0–igc3)      | WAN→Home router; LAN→Switch trunk |
+| Bosgame Mini PC | Ryzen 7 5825U / 32GB / 1TB    | Proxmox host / **SIEM VMs**  | U07 (shelf)   | 19V DC to PDU  | 1×1G                  | USB to SATA dock; VLAN 40 (Lab) |
+| Raspberry Pi 5  | 8GB                           | IoT / controllers            | U07 (shelf)   | USB-C to PDU   | 1×1G                  | **VLAN 20 (IoT)**; HA/tooling capable |
+| Spare Shelf     | —                             | Future expansion             | U06           | —              | —                     | Currently empty |
+| PDU             | Front-mount PDU               | Power distribution           | U04           | Mains          | —                     | Feeds all gear |
+| Dell OptiPlex   | —                             | **File storage / NAS-style** | U02 (with dock)| Mains         | 1×1G                  | **VLAN 10 (Trusted)** |
+| SATA Dock       | 2-bay USB (8TB + 2TB HDD)     | Bulk storage                 | U02 (with Dell)| 12V DC to PDU | USB→Bosgame           | Media/backup; not NAS-grade |
+| ISP Router      | *(Home router)*               | Internet uplink              | External      | Mains          | 4×LAN                 | Provides DHCP to pfSense **WAN** |
+
 ---
 
 ## Patch Panel → Switch Mapping
