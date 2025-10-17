@@ -10,4 +10,4 @@
 | 40 | Lab | 192.168.40.0/24 | 192.168.40.1 | 192.168.40.50–199 |
 | 99 | Mgmt | 192.168.99.0/24 | 192.168.99.1 | Static only |
 
-Note: VLAN 40 supports the Proxmox host (Bosgame) and virtualised SIEM workloads.
+Note: VLAN 40 supports the Proxmox host (Bosgame) and virtualized SIEM workloads.
