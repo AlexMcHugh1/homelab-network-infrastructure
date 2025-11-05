@@ -1,5 +1,7 @@
 # Cisco WS-C2960S Configuration
 
+---
+
 ## VLAN Definitions
 ```bash
 vlan 10
@@ -15,6 +17,8 @@ vlan 99
 exit
 ```
 
+---
+
 ## Trunk to pfSense
 ```bash
 interface gigabitEthernet1/0/1
@@ -27,31 +31,54 @@ interface gigabitEthernet1/0/1
 exit
 ```
 
+---
+
 ## Access Ports
 ```bash
-interface range gi1/0/2 , gi1/0/6
- description Lab_Devices
+interface gi1/0/2
+ description Bosgame_Lab_Server
  switchport mode access
  switchport access vlan 40
  spanning-tree portfast
 exit
 
 interface gi1/0/3
- description IoT_Device
+ description RaspberryPi_Lab_Node
  switchport mode access
- switchport access vlan 20
+ switchport access vlan 40
  spanning-tree portfast
 exit
 
-
-
-interface range gi1/0/4 , gi1/0/5
- description Trusted_Devices
+interface gi1/0/4
+ description Dell_OptiPlex_Trusted
  switchport mode access
  switchport access vlan 10
  spanning-tree portfast
 exit
+
+interface gi1/0/5
+ description DesktopPC_Trusted
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+exit
+
+interface gi1/0/6
+ description ThinkPad_Kali_Lab
+ switchport mode access
+ switchport access vlan 40
+ spanning-tree portfast
+exit
+
+interface gi1/0/7
+ description TPLink_EAP653_IoT_AP
+ switchport mode access
+ switchport access vlan 20
+ spanning-tree portfast
+exit
 ```
+
+---
 
 ## Management Interface
 ```bash
