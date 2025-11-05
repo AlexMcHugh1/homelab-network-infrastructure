@@ -17,11 +17,12 @@ The lab network is fully segmented from the home Wi-Fi network and used for fire
 |---------|------|-------|
 | Protectli FW4C | pfSense firewall & router | WAN from home router, LAN trunk to switch |
 | Cisco WS-C2960S-24TS-L | Managed Layer 2 switch | VLAN trunk & segmentation |
-| Bosgame Mini PC | Lab server | VLAN 40 (Lab) |
-| Raspberry Pi 5 | Sandbox node | VLAN 20 (IoT) |
-| Dell OptiPlex | Test workstation | VLAN 10 (Trusted) |
-| Desktop PC | Admin desktop | VLAN 10 (Trusted) |
-| ThinkPad (Kali) | Pentesting laptop | VLAN 40 (Lab) |
+| TP-Link EAP653 | Wi-Fi 6 Access Point | VLAN20 (IoT), powered by 12V DC adapter |
+| Bosgame Mini PC | Lab server | VLAN40 (Lab) |
+| Raspberry Pi 5 | Sandbox node / controllers | VLAN40 (Lab) |
+| Dell OptiPlex | Test workstation / SIEM node | VLAN10 (Trusted) |
+| Desktop PC | Admin desktop | VLAN10 (Trusted) |
+| ThinkPad (Kali) | Pentesting laptop | VLAN40 (Lab) |
 | Patch Panel (24-Port) | Physical cable management | WAN + LAN organized by port |
 
 ---
@@ -40,10 +41,10 @@ The lab network is fully segmented from the home Wi-Fi network and used for fire
        │
 [Cisco Switch Gi1/0/1 - Trunk]
        │
- ┌────────────┬──────────────┬──────────────┐
- │ VLAN10     │ VLAN40       │ VLAN99       │
- │ Trusted PCs│ Lab Devices  │ Switch Mgmt  │
- └────────────┴──────────────┴──────────────┘
+ ┌───────────────┬──────────────┬───────────────┬───────────────┐
+ │ VLAN10        │ VLAN20       │ VLAN40        │ VLAN99        │
+ │ Trusted PCs   │ IoT / EAP653 │ Lab Devices   │ Switch Mgmt   │
+ └───────────────┴──────────────┴───────────────┴───────────────┘
 ```
 
 ---
@@ -53,10 +54,10 @@ The lab network is fully segmented from the home Wi-Fi network and used for fire
 | VLAN | Name | Purpose | Subnet | DHCP Range | Notes |
 |------|------|----------|---------|-------------|-------|
 | 10 | Trusted | Admin + Workstations | 192.168.10.0/24 | .50–.199 | Native VLAN |
-| 20 | IoT | Smart/isolated devices | 192.168.20.0/24 | .50–.199 | Internet only |
-| 30 | Guest | External/temporary | 192.168.30.0/24 | .50–.199 | Internet only |
+| 20 | IoT | Smart/isolated + Wi-Fi | 192.168.20.0/24 | .50–.199 | EAP653 Access Point |
+| 30 | Guest | Temporary external | 192.168.30.0/24 | .50–.199 | Internet-only |
 | 40 | Lab | Servers + testing | 192.168.40.0/24 | .50–.199 | For VMs, Pis, etc. |
-| 99 | Mgmt | Infrastructure management | 192.168.99.0/24 | Static only | Switch management IP |
+| 99 | Mgmt | Infrastructure management | 192.168.99.0/24 | Static only | Switch mgmt |
 
 ---
 
@@ -64,21 +65,21 @@ The lab network is fully segmented from the home Wi-Fi network and used for fire
 
 | File | Description |
 |------|--------------|
-| [`01_rack_plan_and_inventory.md`](docs/01_rack_plan_and_inventory.md) | Rack elevation and full inventory |
-| [`02_physical_topology.md`](docs/02_physical_topology.md) | Rack wiring, patch panel, and switch mapping |
-| [`03_network_design.md`](docs/03_network_design.md) | VLAN plan, subnets, and IP addressing |
-| [`04_switch_configuration.md`](docs/04_switch_configuration.md) | Cisco WS-C2960S trunk + access port config |
-| [`05_pfsense_configuration.md`](docs/05_pfsense_configuration.md) | pfSense VLANs, DHCP, and firewall setup |
-| [`06_testing_and_verification.md`](docs/06_testing_and_verification.md) | Ping, isolation, and connectivity tests |
+| `01_rack_plan_and_inventory.md` | Rack elevation and full inventory |
+| `02_physical_topology.md` | Rack wiring, patch panel, and switch mapping |
+| `03_network_design.md` | VLAN plan, subnets, and IP addressing |
+| `04_switch_configuration.md` | Cisco WS-C2960S trunk + access port config |
+| `05_pfsense_configuration.md` | pfSense VLANs, DHCP, and firewall setup |
+| `06_testing_and_verification.md` | Connectivity and isolation tests |
 
 ---
 
 ## Network Isolation Summary
 
-- Lab VLANs (20, 30, 40, 99) **cannot reach** the home network or each other.  
-- Trusted VLAN (10) can manage pfSense and the switch (VLAN99).  
-- All VLANs have NAT outbound via pfSense → Home router → Internet.  
-- Wi-Fi devices remain on the home router subnet (e.g. 192.168.0.0/24) and are **not routed** through pfSense.
+- VLAN20 (IoT + TP-Link EAP653 Wi-Fi) is **isolated** from VLAN10 and VLAN40.
+- VLAN10 (Trusted) can manage pfSense and the switch (VLAN99).
+- VLAN30 (Guest) has Internet-only access.
+- VLAN40 (Lab) isolated for SIEM and Proxmox workloads.
 
 ---
 
@@ -88,4 +89,3 @@ The lab network is fully segmented from the home Wi-Fi network and used for fire
 - Deploy internal DNS and Pi-hole container on Bosgame mini PC
 - Add OpenVPN or WireGuard remote access for lab testing
 - Document configuration backups and syslog setup
-
